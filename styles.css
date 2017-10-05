@@ -1,0 +1,26 @@
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+.pluginBtn {
+    padding: 25px 0;
+}
+
+body, html, .container-fluid, .row, .col-sm-2, .col-sm-8, .panel {
+    height: 100%;
+}
+
+.form-control[type="color"] {
+    width: 44px;
+}
+.lineWidth {
+    width: 64px;
+    display: inline-block;
+}
