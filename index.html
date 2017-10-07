@@ -14,7 +14,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
 	<link rel="stylesheet" href="styles.css">
-
+	<script src="simpleFigure.js"></script>
+	<script src="mainScript.js"></script>
 </head>
 <body>
 
@@ -43,9 +44,38 @@
 						</ul>
 					</li>
 					
-					<li class="dropdown disabled">
-						<a class="dropdown-toggle disabled" data-toggle="dropdown" href="#">Edit</a>
-						<ul class="dropdown-menu">
+					<!--<li class="dropdown disabled">-->
+					<li class="dropdown">
+						<!--<a class="dropdown-toggle disabled" data-toggle="dropdown" href="#">Edit</a>-->
+						<a class="dropdown-toggle" data-toggle="dropdown">Edit</a>
+						<ul class="dropdown-menu" id="editSubMenu">
+							<li class="dropdown-submenu">
+								<a class="test">Figure<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li class="dropdown-submenu"><a class="test">Type<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li><a>Line</a></li>
+											<li><a>Rectangle</a></li>
+											<li><a>RRectangle</a></li>
+											<li><a>Ellipse</a></li>
+										</ul>
+									</li>
+									<li>
+										<label style="padding: 0 20px">Color
+										<input class="form-control" type="color" value="#563d7c" style="display: inline-block">
+										</label>
+									</li>
+									<li class="dropdown-submenu"><a class="test">Width<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li><a>1</a></li>
+											<li><a>5</a></li>
+											<li><a>10</a></li>
+											<li><a>15</a></li>
+											<li><a>20</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
 						</ul>
 					</li>
 					
@@ -78,10 +108,10 @@
 					
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Plugins</a>
-						<ul class="dropdown-menu">
-							<div class="checkbox">
-								<label><input type="checkbox" value="">Simple Figure</label>
-							</div>
+						<ul class="dropdown-menu" id="pluginsSubMenu">
+							<!--<div class="checkbox">-->
+								<!--<label><input type="checkbox" value="" checked="checked">Simple Figure</label>-->
+							<!--</div>-->
 						</ul>
 					</li>
 					
@@ -282,8 +312,6 @@
 	
 	
 </div>
-
-<script src="mainScript.js"></script>
 
 </body>
 </html>

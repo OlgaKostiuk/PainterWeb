@@ -1,20 +1,57 @@
 /**
  * Created by Olga on 10/6/2017.
  */
-class SimpleFigure{
-    addMenu() {
+var SimpleFigure = {
+    getName(){
+        return "SimpleFigurePlugin";
+    },
+
+    getPluginsMenuItem(){
+        return $('<div/>', {
+            "class" : 'checkbox'
+        }).append(
+            $('<label/>').append(
+                $('<input/>', {
+                    "type" : 'checkbox',
+                    "checked": 'checked'
+                })
+            ).append("Simple Figure")
+        )
+        // return $('<div/>', {"class": 'checkbox'})
+        //     .append($('<input/>', {
+        //         "type": 'checkbox',
+        //         "checked": 'checked',
+        //         "id": 'ololo'
+        //     }))
+        //     .append($('<label/>', {
+        //             "for": 'ololo'
+        //         })
+        //             .append("Simple Figure")
+        //     )
+    },
+
+    getEditMenu() {
+
+    },
+
+    getToolBar() {
+
+    },
+
+    getLeftToolBox(){
+
+    },
+
+    getRightToolBox(){
 
     }
+};
 
-    addToolBar() {
-
+var XCommand = {
+    setColor(){
+        alert("setColor");
+    },
+    setType(){
+        alert("setType");
     }
-
-    addLeftToolBox(){
-
-    }
-
-    addRightToolBox(){
-
-    }
-}
+};

@@ -24,3 +24,6 @@ body, html, .container-fluid, .row, .col-sm-2, .col-sm-8, .panel {
     width: 64px;
     display: inline-block;
 }
+li{
+    cursor: pointer;
+}
