@@ -23,14 +23,14 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myMenuBar">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
 				<!--<a class="navbar-brand" href="#">Paint</a>-->
 			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
+			<div class="collapse navbar-collapse" id="myMenuBar">
 				<ul class="nav navbar-nav">
 					
 					<li class="dropdown">
@@ -49,33 +49,36 @@
 						<!--<a class="dropdown-toggle disabled" data-toggle="dropdown" href="#">Edit</a>-->
 						<a class="dropdown-toggle" data-toggle="dropdown">Edit</a>
 						<ul class="dropdown-menu" id="editSubMenu">
-							<li class="dropdown-submenu">
-								<a class="test">Figure<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li class="dropdown-submenu"><a class="test">Type<span class="caret"></span></a>
-										<ul class="dropdown-menu">
-											<li><a>Line</a></li>
-											<li><a>Rectangle</a></li>
-											<li><a>RRectangle</a></li>
-											<li><a>Ellipse</a></li>
-										</ul>
-									</li>
-									<li>
-										<label style="padding: 0 20px">Color
-										<input class="form-control" type="color" value="#563d7c" style="display: inline-block">
-										</label>
-									</li>
-									<li class="dropdown-submenu"><a class="test">Width<span class="caret"></span></a>
-										<ul class="dropdown-menu">
-											<li><a>1</a></li>
-											<li><a>5</a></li>
-											<li><a>10</a></li>
-											<li><a>15</a></li>
-											<li><a>20</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
+							<!--<li class="dropdown-submenu">-->
+								<!--<a class="subMenuHeader">Figure<span class="caret"></span></a>-->
+								<!--<ul class="dropdown-menu">-->
+									<!--<li class="dropdown-submenu"><a class="subMenuHeader">Type<span-->
+											<!--class="caret"></span></a>-->
+										<!--<ul class="dropdown-menu">-->
+											<!--<li><a>Line</a></li>-->
+											<!--<li><a>Rectangle</a></li>-->
+											<!--<li><a>RRectangle</a></li>-->
+											<!--<li><a>Ellipse</a></li>-->
+										<!--</ul>-->
+									<!--</li>-->
+									<!--<li>-->
+										<!--<label style="padding: 0 20px">Color-->
+											<!--<input class="form-control" type="color" value="#563d7c"-->
+											       <!--style="display: inline-block">-->
+										<!--</label>-->
+									<!--</li>-->
+									<!--<li class="dropdown-submenu"><a class="subMenuHeader">Width<span-->
+											<!--class="caret"></span></a>-->
+										<!--<ul class="dropdown-menu">-->
+											<!--<li><a>1</a></li>-->
+											<!--<li><a>5</a></li>-->
+											<!--<li><a>10</a></li>-->
+											<!--<li><a>15</a></li>-->
+											<!--<li><a>20</a></li>-->
+										<!--</ul>-->
+									<!--</li>-->
+								<!--</ul>-->
+							<!--</li>-->
 						</ul>
 					</li>
 					
@@ -110,7 +113,7 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Plugins</a>
 						<ul class="dropdown-menu" id="pluginsSubMenu">
 							<!--<div class="checkbox">-->
-								<!--<label><input type="checkbox" value="" checked="checked">Simple Figure</label>-->
+							<!--<label><input type="checkbox" value="" checked="checked">Simple Figure</label>-->
 							<!--</div>-->
 						</ul>
 					</li>
@@ -119,7 +122,7 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Settings</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-submenu">
-								<a class="test"href="#">Language<span class="caret"></span></a>
+								<a class="subMenuHeader" href="#">Language<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Russian</a></li>
 									<li><a href="#">English</a></li>
@@ -127,7 +130,7 @@
 								</ul>
 							</li>
 							<li class="dropdown-submenu">
-								<a class="test" href="#">Skins<span class="caret"></span></a>
+								<a class="subMenuHeader" href="#">Skins<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Skin 1</a></li>
 									<li><a href="#">Skin 2</a></li>
@@ -210,11 +213,13 @@
 					<li>
 						<label> Figure </label>
 						<div class="dropdown" style="display: inline-block">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#"><button class="btn navbar-btn btn-default">
-								<span class="glyphicon glyphicon-tree-conifer"></span>
-								<br/>
-								Type
-							</button></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<button class="btn navbar-btn btn-default">
+									<span class="glyphicon glyphicon-tree-conifer"></span>
+									<br/>
+									Type
+								</button>
+							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Line</a></li>
 								<li><a href="#">Rectangle</a></li>
@@ -249,24 +254,33 @@
 		<div class="col-sm-2">
 			<div class="panel panel-default">
 				<div class="panel-heading text-center">Figure Type</div>
-				<div class="panel-body">
-					<button type="button" class="btn btn-primary btn-block pluginBtn">Simple figure</button>
+				<div id="leftToolBox">
+					<!--<div class="panel-body pluginElement">-->
+					<!--<button type="button" class="btn btn-primary btn-block pluginBtn">Simple figure</button>-->
+					<!--</div>-->
 				</div>
 			</div>
 		</div>
 		
 		<div class="col-sm-8">
 			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#tab1"><button class="close closeTab" type="button" >×</button>Tab 1</a></li>
-				<li><a data-toggle="tab" href="#tab2"><button class="close closeTab" type="button" >×</button>Tab 2</a></li>
-				<li><a data-toggle="tab" href="#tab3"><button class="close closeTab" type="button" >×</button>Tab 3</a></li>
+				<li class="active"><a data-toggle="tab" href="#tab1">
+					<button class="close closeTab" type="button">×</button>
+					Tab 1</a></li>
+				<li><a data-toggle="tab" href="#tab2">
+					<button class="close closeTab" type="button">×</button>
+					Tab 2</a></li>
+				<li><a data-toggle="tab" href="#tab3">
+					<button class="close closeTab" type="button">×</button>
+					Tab 3</a></li>
 			</ul>
 			
 			<div class="tab-content">
 				<div id="tab1" class="tab-pane fade in active">
 					
-					<svg width="1000" height="800" id="tablet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
-					
+					<svg width="1000" height="800" id="tablet" xmlns="http://www.w3.org/2000/svg"
+					     xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
+				
 				</div>
 				<div id="tab2" class="tab-pane fade">
 					<h3>Tab 2</h3>
@@ -282,35 +296,37 @@
 		<div class="col-sm-2">
 			<div class="panel panel-default">
 				<div class="panel-heading text-center">Properties</div>
-				<div class="panel-body">
-					<label>Type:</label>
-					<div class="btn-group-vertical">
-						<button type="button" class="btn btn-default">Line</button>
-						<button type="button" class="btn btn-primary">Rectangle</button>
-						<button type="button" class="btn btn-default">RRectangle</button>
-						<button type="button" class="btn btn-default">Ellipse</button>
-					</div>
-				</div>
-				<div class="panel-body">
-					<label>Color</label>
-					<input class="form-control" type="color" value="#563d7c" style="display: inline-block">
-				</div>
-				<div class="panel-body">
-					<label>Width</label>
-					<select class="form-control lineWidth">
-						<option>1</option>
-						<option>5</option>
-						<option>10</option>
-						<option>15</option>
-						<option>20</option>
-					</select>
+				<div id="rightToolBox">
+					<!--<div class="panel-body">-->
+						<!--<label>Type:</label>-->
+						<!--<div class="btn-group-vertical">-->
+							<!--<button type="button" class="btn btn-default">Line</button>-->
+							<!--<button type="button" class="btn btn-primary">Rectangle</button>-->
+							<!--<button type="button" class="btn btn-default">RRectangle</button>-->
+							<!--<button type="button" class="btn btn-default">Ellipse</button>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="panel-body">-->
+						<!--<label>Color</label>-->
+						<!--<input class="form-control" type="color" value="#563d7c" style="display: inline-block">-->
+					<!--</div>-->
+					<!--<div class="panel-body">-->
+						<!--<label>Width</label>-->
+						<!--<select class="form-control lineWidth">-->
+							<!--<option>1</option>-->
+							<!--<option>5</option>-->
+							<!--<option>10</option>-->
+							<!--<option>15</option>-->
+							<!--<option>20</option>-->
+						<!--</select>-->
+					<!--</div>-->
 				</div>
 			</div>
 		</div>
-		
+	
 	</div>
-	
-	
+
+
 </div>
 
 </body>

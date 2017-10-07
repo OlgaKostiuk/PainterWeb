@@ -4,35 +4,78 @@
 
 window.myPlugins = [];
 window.myPlugins.push(SimpleFigure);
+var activePlugin = window.myPlugins[0];
 
 var editInMenu;
 var pluginsInMenu;
+var leftToolBox;
+var rightToolBox;
 
 $(document).ready(function(){
     registerOpenEventForMenuItems();
-    registerCloseEvent();
+    registerCloseTabEvent();
 
     initVariables();
 
-    setPluginsMenu();
+    setPluginsInMenu();
+    setLeftToolBox();
+    setEditInMenu();
 });
 
 
 function initVariables(){
     editInMenu = $("#editSubMenu");
     pluginsInMenu = $("#pluginsSubMenu");
+    leftToolBox = $("#leftToolBox");
+    rightToolBox = $("#rightToolBox");
 }
 
-function setPluginsMenu(){
-    let plugin = window.myPlugins[0];
-    let item = plugin.getPluginsMenuItem();
-    $("input", item).click({plugin: plugin}, togglePlugin);
-    pluginsInMenu.append(item);
+function setPluginsInMenu(){
+    for(let i in window.myPlugins){
+        let plugin = window.myPlugins[i];
+        let item = plugin.getPluginsMenuItem();
+        $("input", item).change({plugin: plugin}, togglePlugin);
+        pluginsInMenu.append(item);
+    }
+}
+
+function setLeftToolBox(){
+    for(let i in window.myPlugins){
+        let plugin = window.myPlugins[i];
+        let item = plugin.getLeftToolBox();
+        $("button", item).click({plugin: plugin}, changeActivePlugin);
+        leftToolBox.append(item);
+    }
+}
+
+function setRightToolBox(){
+    rightToolBox.empty();
+    rightToolBox.append(activePlugin.getRightToolBox());
+}
+
+function setEditInMenu(){
+    editInMenu.empty();
+    editInMenu.append(activePlugin.getEditMenu());
+    registerOpenEventForMenuItems();
 }
 
 function togglePlugin(event){
-    alert("togglePlugin " + event.data.plugin.getName());
+    if(event.target.checked){
+        alert("Activate plugin: " + event.data.plugin.getName());
+    }
+    else{
+        alert("Deactivate plugin: " + event.data.plugin.getName());
+    }
 }
+
+function changeActivePlugin(event){
+    alert("Change active plugin: " + event.data.plugin.getName());
+    activePlugin = event.data.plugin;
+    setRightToolBox();
+    setEditInMenu();
+}
+
+
 
 
 
@@ -40,14 +83,14 @@ function togglePlugin(event){
 
 
 function registerOpenEventForMenuItems(){
-    $('.dropdown-submenu a.test').on("click", function(e){
+    $('.dropdown-submenu a.subMenuHeader').on("click", function(e){
         $(this).next('ul').toggle();
         e.stopPropagation();
         e.preventDefault();
     });
 }
 
-function registerCloseEvent() {
+function registerCloseTabEvent() {
 
     $(".closeTab").click(function () {
 
