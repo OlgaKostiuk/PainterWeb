@@ -34,20 +34,20 @@
 				<ul class="nav navbar-nav">
 					
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">File</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" id="mFile">File</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Save</a></li>
-							<li><a href="#">Open</a></li>
+							<li><a id="mSave">Save</a></li>
+							<li><a id="mOpen">Open</a></li>
 							<li class="divider"></li>
-							<li><a href="#">Save in Cloud</a></li>
-							<li><a href="#">Load from Cloud</a></li>
+							<li><a id="mSaveInCloud">Save in Cloud</a></li>
+							<li><a id="mLoadFromCloud">Load from Cloud</a></li>
 						</ul>
 					</li>
 					
 					<!--<li class="dropdown disabled">-->
 					<li class="dropdown">
 						<!--<a class="dropdown-toggle disabled" data-toggle="dropdown" href="#">Edit</a>-->
-						<a class="dropdown-toggle" data-toggle="dropdown">Edit</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" id="mEdit">Edit</a>
 						<ul class="dropdown-menu" id="editSubMenu">
 							<!--<li class="dropdown-submenu">-->
 								<!--<a class="subMenuHeader">Figure<span class="caret"></span></a>-->
@@ -83,7 +83,7 @@
 					</li>
 					
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">View</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" id="mView">View</a>
 						<ul class="dropdown-menu">
 							<div class="checkbox">
 								<label><input type="checkbox" value="">ToolBar</label>
@@ -95,7 +95,7 @@
 					</li>
 					
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Tab</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" id="mTab">Tab</a>
 						<ul class="dropdown-menu">
 							<li><a href="#">New Tab</a></li>
 							<li><a href="#">Rename Tab</a></li>
@@ -104,13 +104,13 @@
 					</li>
 					
 					<li class="dropdown disabled">
-						<a class="dropdown-toggle disabled" data-toggle="dropdown" href="#">Pages</a>
+						<a class="dropdown-toggle disabled" data-toggle="dropdown" id="mPages">Pages</a>
 						<ul class="dropdown-menu">
 						</ul>
 					</li>
 					
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Plugins</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" id="mPlugins">Plugins</a>
 						<ul class="dropdown-menu" id="pluginsSubMenu">
 							<!--<div class="checkbox">-->
 							<!--<label><input type="checkbox" value="" checked="checked">Simple Figure</label>-->
@@ -119,7 +119,7 @@
 					</li>
 					
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Settings</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" id="mSettings">Settings</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-submenu">
 								<a class="subMenuHeader" href="#">Language<span class="caret"></span></a>
@@ -141,7 +141,7 @@
 					</li>
 					
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Help</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" id="mHelp">Help</a>
 						<ul class="dropdown-menu">
 							<li><a href="#">FAQ</a></li>
 							<li><a href="#">About</a></li>
@@ -167,12 +167,12 @@
 				<ul class="nav navbar-nav">
 					<li>
 						<label> File </label>
-						<button class="btn navbar-btn btn-default">
+						<button class="btn navbar-btn btn-default" id="tSave">
 							<span class="glyphicon glyphicon-floppy-save"></span>
 							<br/>
 							Save
 						</button>
-						<button class="btn navbar-btn btn-default">
+						<button class="btn navbar-btn btn-default" id="tLoad">
 							<span class="glyphicon glyphicon-download-alt"></span>
 							<br/>
 							Load
@@ -181,12 +181,12 @@
 					</li>
 					<li>
 						<label> Cloud </label>
-						<button class="btn navbar-btn btn-default">
+						<button class="btn navbar-btn btn-default" id="tSaveCloud">
 							<span class="glyphicon glyphicon-cloud-upload"></span>
 							<br/>
 							Save
 						</button>
-						<button class="btn navbar-btn btn-default">
+						<button class="btn navbar-btn btn-default" id="tLoadCloud">
 							<span class="glyphicon glyphicon-cloud-download"></span>
 							<br/>
 							Load
@@ -194,17 +194,17 @@
 					</li>
 					<li>
 						<label> Tab </label>
-						<button class="btn navbar-btn btn-default">
+						<button class="btn navbar-btn btn-default" id="tNew">
 							<span class="glyphicon glyphicon-plus"></span>
 							<br/>
 							New
 						</button>
-						<button class="btn navbar-btn btn-default">
+						<button class="btn navbar-btn btn-default" id="tDel">
 							<span class="glyphicon glyphicon-remove"></span>
 							<br/>
 							Del
 						</button>
-						<button class="btn navbar-btn btn-default">
+						<button class="btn navbar-btn btn-default" id="tReN">
 							<span class="glyphicon glyphicon-text-background"></span>
 							<br/>
 							ReN
