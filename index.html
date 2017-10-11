@@ -16,6 +16,8 @@
 	<link rel="stylesheet" href="styles.css">
 	<script src="simpleFigure.js"></script>
 	<script src="mainScript.js"></script>
+	<link rel="stylesheet" href="svg/jquery.svg.css">
+	<script src="svg/jquery.svg.js"></script>
 </head>
 <body>
 
@@ -157,14 +159,14 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myToolBar">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myToolBarContainer">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="collapse navbar-collapse" id="myToolBar">
-				<ul class="nav navbar-nav">
+			<div class="collapse navbar-collapse" id="myToolBarContainer">
+				<ul class="nav navbar-nav" id="toolBar">
 					<li>
 						<label> File </label>
 						<button class="btn navbar-btn btn-default" id="tSave">
@@ -210,39 +212,41 @@
 							ReN
 						</button>
 					</li>
-					<li>
-						<label> Figure </label>
-						<div class="dropdown" style="display: inline-block">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-								<button class="btn navbar-btn btn-default">
-									<span class="glyphicon glyphicon-tree-conifer"></span>
-									<br/>
-									Type
-								</button>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Line</a></li>
-								<li><a href="#">Rectangle</a></li>
-								<li><a href="#">RRectangle</a></li>
-								<li><a href="#">Ellipse</a></li>
-							</ul>
-						</div>
-						
-						<div style="display: inline-grid">
-							<select class="form-control lineWidth">
-								<option>1</option>
-								<option>5</option>
-								<option>10</option>
-								<option>15</option>
-								<option>20</option>
-							</select>
-							<span class="text-center">Width</span>
-						</div>
-						<div style="display: inline-grid">
-							<input class="form-control" type="color" value="#563d7c" id="example-color-input">
-							<span class="text-center">Color</span>
-						</div>
-					</li>
+					<div id="pluginToolBar">
+						<!--<li>-->
+							<!--<label> Figure </label>-->
+							<!--<div class="dropdown" style="display: inline-block">-->
+								<!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">-->
+									<!--<button class="btn navbar-btn btn-default">-->
+										<!--<span class="glyphicon glyphicon-tree-conifer"></span>-->
+										<!--<br/>-->
+										<!--Type-->
+									<!--</button>-->
+								<!--</a>-->
+								<!--<ul class="dropdown-menu">-->
+									<!--<li><a href="#">Line</a></li>-->
+									<!--<li><a href="#">Rectangle</a></li>-->
+									<!--<li><a href="#">RRectangle</a></li>-->
+									<!--<li><a href="#">Ellipse</a></li>-->
+								<!--</ul>-->
+							<!--</div>-->
+							<!---->
+							<!--<div style="display: inline-grid">-->
+								<!--<select class="form-control lineWidth">-->
+									<!--<option>1</option>-->
+									<!--<option>5</option>-->
+									<!--<option>10</option>-->
+									<!--<option>15</option>-->
+									<!--<option>20</option>-->
+								<!--</select>-->
+								<!--<span class="text-center">Width</span>-->
+							<!--</div>-->
+							<!--<div style="display: inline-grid">-->
+								<!--<input class="form-control" type="color" value="#563d7c" id="example-color-input">-->
+								<!--<span class="text-center">Color</span>-->
+							<!--</div>-->
+						<!--</li>-->
+					</div>
 				</ul>
 			</div>
 		</div>
@@ -263,33 +267,31 @@
 		</div>
 		
 		<div class="col-sm-8">
-			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#tab1">
-					<button class="close closeTab" type="button">×</button>
-					Tab 1</a></li>
-				<li><a data-toggle="tab" href="#tab2">
-					<button class="close closeTab" type="button">×</button>
-					Tab 2</a></li>
-				<li><a data-toggle="tab" href="#tab3">
-					<button class="close closeTab" type="button">×</button>
-					Tab 3</a></li>
+			<ul class="nav nav-tabs" id="tabTitlesContainer">
+				<!--<li class="active tabTitle"><a data-toggle="tab" href="#tab1">-->
+					<!--<button class="close closeTab" type="button">×</button>-->
+					<!--Tab 1</a></li>-->
+				<!--<li><a data-toggle="tab" href="#tab2">-->
+					<!--<button class="close closeTab" type="button">×</button>-->
+					<!--Tab 2</a></li>-->
+				<!--<li><a data-toggle="tab" href="#tab3">-->
+					<!--<button class="close closeTab" type="button">×</button>-->
+					<!--Tab 3</a></li>-->
 			</ul>
 			
-			<div class="tab-content">
-				<div id="tab1" class="tab-pane fade in active">
-					
-					<svg width="1000" height="800" id="tablet" xmlns="http://www.w3.org/2000/svg"
-					     xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
-				
-				</div>
-				<div id="tab2" class="tab-pane fade">
-					<h3>Tab 2</h3>
-					<p>Some content 2.</p>
-				</div>
-				<div id="tab3" class="tab-pane fade">
-					<h3>Tab 3</h3>
-					<p>Some content 3.</p>
-				</div>
+			<div class="tab-content" id="tabsContainer">
+				<!--<div id="tab1" class="painterTab tab-pane fade in active">-->
+					<!--<svg width="1000" height="800" id="tablet" xmlns="http://www.w3.org/2000/svg"-->
+					     <!--xmlns:xlink="http://www.w3.org/1999/xlink"></svg>-->
+				<!--</div>-->
+				<!--<div id="tab2" class="tab-pane fade">-->
+					<!--<h3>Tab 2</h3>-->
+					<!--<p>Some content 2.</p>-->
+				<!--</div>-->
+				<!--<div id="tab3" class="tab-pane fade">-->
+					<!--<h3>Tab 3</h3>-->
+					<!--<p>Some content 3.</p>-->
+				<!--</div>-->
 			</div>
 		</div>
 		
