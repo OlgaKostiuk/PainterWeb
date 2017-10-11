@@ -123,10 +123,10 @@ var SimpleFigure = {
         					<div class="panel-body">\
                                 <label>Type:</label>\
                                 <div class="btn-group-vertical">\
-                                    <button type="button" class="typeBtn btn btn-default">Line</button>\
-                                    <button type="button" class="typeBtn btn btn-primary">Rectangle</button>\
-                                    <button type="button" class="typeBtn btn btn-default">RRectangle</button>\
-                                    <button type="button" class="typeBtn btn btn-default">Ellipse</button>\
+                                    <button type="button" class="typeBtn btn btn-default" value="Line">Line</button>\
+                                    <button type="button" class="typeBtn btn btn-primary" value="Rectangle">Rectangle</button>\
+                                    <button type="button" class="typeBtn btn btn-default" value="RRectangle">RRectangle</button>\
+                                    <button type="button" class="typeBtn btn btn-default" value="Ellipse">Ellipse</button>\
                                 </div>\
                             </div>\
                             <div class="panel-body">\

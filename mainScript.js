@@ -113,8 +113,7 @@ var XCommand = {
                 this.Figures.push(figure);
             }
         };
-        debugger;
-        newTab.Title = "Tab " + Tabs.length;
+        newTab.Title = "Tab" + Tabs.length;
         newTab.HtmlTitle = $.parseHTML('\
                                 <li class="active tabTitle">\
                                     <a aria-expanded="true" data-toggle="tab" href="#' + newTab.Title +'">\
@@ -134,11 +133,7 @@ var XCommand = {
         $(newTab.HtmlBody).svg();
         newTab.SvgWrapper = $(newTab.HtmlBody).svg("get");
 
-        $("a", newTab.HtmlTitle).on("shown.bs.tab", function(e){
-            let targetHref = $(e.target).attr("href");
-            alert(targetHref);
-            // this.ActivePlugin.activate();
-        });
+        $("a", newTab.HtmlTitle).on("shown.bs.tab", SelectTabHandler.bind(null, newTab));
 
         $(".closeTab", newTab.HtmlTitle).click(function () {
             var tabContentId = $(this).parent().attr("href");
@@ -159,6 +154,12 @@ var XCommand = {
     //     HtmlElements.tabsContainer.append(tab.HtmlBody);
     // }
 };
+
+function SelectTabHandler(tab,e){
+    let targetHref = $(e.target).attr("href");
+    alert(targetHref);
+    ActivePlugin.activate($("svg", tab.HtmlBody), tab.SvgWrapper, tab.FigureCreatedCallback);
+}
 
 function DisplayTab(tab){
     $('.tabTitle').removeClass('active').attr('aria-expanded', 'false');
