@@ -15,6 +15,9 @@ var currentSvgElement = null;
 var currentSvgWrapper = null;
 var callBackFigureCreated = null;
 
+var typeBtns;
+var toolBoxColorPicker;
+
 var Figure = {
     color: null,
     width: null,
@@ -131,7 +134,7 @@ var SimpleFigure = {
                             </div>\
                             <div class="panel-body">\
                                 <label>Color</label>\
-                                <input class="form-control" type="color" value="#563d7c" style="display: inline-block">\
+                                <input class="colorPicker form-control" type="color" value="#563d7c" style="display: inline-block">\
                             </div>\
                             <div class="panel-body">\
                                 <label>Width</label>\
@@ -144,17 +147,36 @@ var SimpleFigure = {
                                 </select>\
                             </div>\
                             ');
-        $(".typeBtn", rightToolBox).click(this.XCommand.setType);
+        typeBtns = $(".typeBtn", rightToolBox);
+        toolBoxColorPicker = $(".colorPicker", rightToolBox);
+        $(typeBtns).click(this.XCommand.setType);
+        $(toolBoxColorPicker).change({color: this.val()}, this.XCommand.setColor);
         return rightToolBox;
     },
 
     XCommand: {
         setColor(){
             alert("setColor");
+            concole.log(Figure.color);
         },
         setType(){
-            alert("setType");
-            console.log(this.type)
+            $(typeBtns).removeClass('btn-primary').addClass('btn-default');
+            $(this).removeClass('btn-default').addClass('btn-primary');
+            Figure.type = this.value;
+            // switch (this.value){
+            //     case FigureTypes.LINE:
+            //         Figure.type = FigureTypes.LINE;
+            //         break;
+            //     case FigureTypes.RECTANGLE:
+            //         Figure.type = FigureTypes.RECTANGLE;
+            //         break;
+            //     case FigureTypes.RRECTANGLE:
+            //         Figure.type = FigureTypes.RRECTANGLE;
+            //         break;
+            //     case FigureTypes.ELLIPSE:
+            //         Figure.type = FigureTypes.ELLIPSE;
+            //         break;
+            // }
         },
         setWidth(){
             alert("setWidth");
