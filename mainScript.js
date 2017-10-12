@@ -2,9 +2,6 @@
  * Created by Olga on 10/6/2017.
  */
 
-// window.myPlugins = [];
-// window.myPlugins.push(SimpleFigure);
-// var activePlugin = window.myPlugins[0];
 var Tabs = [];
 var ActiveTab = null;
 var Plugins = [];
@@ -35,12 +32,7 @@ var HtmlElements = {
     }
 };
 
-
 var XCommand = {
-    // Tabs: [],
-    // ActiveTab: null,
-    // Plugins: [],
-    // ActivePlugin: null,
 
     PluginManager: {
         LoadPlugins(){
@@ -52,7 +44,7 @@ var XCommand = {
             this.SetLeftToolBox();
         },
         SetPluginsListInMenu(){
-            for(let i in Plugins){
+            for (let i in Plugins) {
                 let plugin = Plugins[i];
                 let menuItem = plugin.getPluginsMenuItem();
                 $("input", menuItem).change({plugin: plugin}, this.TogglePlugin);
@@ -60,7 +52,7 @@ var XCommand = {
             }
         },
         SetLeftToolBox(){
-            for(let i in Plugins){
+            for (let i in Plugins) {
                 let plugin = Plugins[i];
                 let item = plugin.getLeftToolBox();
                 let pluginManager = this;
@@ -69,10 +61,10 @@ var XCommand = {
             }
         },
         TogglePlugin(){
-            if(event.target.checked){
+            if (event.target.checked) {
                 alert("Toggle on plugin: " + event.data.plugin.getName());
             }
-            else{
+            else {
                 alert("Toggle off plugin: " + event.data.plugin.getName());
             }
         },
@@ -85,7 +77,6 @@ var XCommand = {
             alert("Activate plugin: " + plugin.getName());
             ActivePlugin = plugin;
             this.DisplayActivePluginTools();
-            //this.ActivePlugin.activate();
         },
         SetRightToolBox(){
             HtmlElements.rightToolBox.empty();
@@ -101,74 +92,27 @@ var XCommand = {
             HtmlElements.pluginToolBar.append(ActivePlugin.getToolBar());
         }
     },
-
-    CreateTab(){
-        let newTab ={
-            Title: null,
-            HtmlBody: null,
-            HtmlTitle: null,
-            SvgWrapper: null,
-            Figures: [],
-            FigureCreatedCallback(figure){
-                this.Figures.push(figure);
-            }
-        };
-        newTab.Title = "Tab" + Tabs.length;
-        newTab.HtmlTitle = $.parseHTML('\
-                                <li class="active tabTitle">\
-                                    <a aria-expanded="true" data-toggle="tab" href="#' + newTab.Title +'">\
-                                    <button class="close closeTab" type="button">×</button>\
-                                    ' + newTab.Title + '</a>\
-                                </li>\
-                                    ');
-
-        $('.tabTitle').removeClass('active').attr('aria-expanded', 'false');
-        HtmlElements.tabTitlesContainer.append(newTab.HtmlTitle);
-
-        newTab.HtmlBody = $.parseHTML('<div id="'+ newTab.Title +'" class="drawTab tab-pane fade active in"></div>');
-
-        $('.drawTab').removeClass('active').removeClass('in');
-        HtmlElements.tabsContainer.append(newTab.HtmlBody);
-
-        $(newTab.HtmlBody).svg();
-        newTab.SvgWrapper = $(newTab.HtmlBody).svg("get");
-
-        $("a", newTab.HtmlTitle).on("shown.bs.tab", SelectTabHandler.bind(null, newTab));
-
-        $(".closeTab", newTab.HtmlTitle).click(function () {
-            var tabContentId = $(this).parent().attr("href");
-            $(this).parent().parent().remove(); //remove li of tab
-            //TODO: Select first tab
-            $(tabContentId).remove(); //remove respective tab content
-        });
-
-        Tabs.push(newTab);
-        ActiveTab = newTab;
-        //this.DisplayTab(newTab);
-        ActivePlugin.activate($("svg", newTab.HtmlBody), newTab.SvgWrapper, newTab.FigureCreatedCallback);
-    },
-    // DisplayTab(tab){
-    //     $('.tabTitle').removeClass('active').attr('aria-expanded', 'false');
-    //     HtmlElements.tabTitlesContainer.append(tab.HtmlTitle);
-    //     $('.painterTab').removeClass('active').removeClass('in');
-    //     HtmlElements.tabsContainer.append(tab.HtmlBody);
-    // }
+    CreateTab: function () {
+        let tab = new Tab();
+        ActiveTab = tab;
+        Tabs.push(tab);
+        tab.display(HtmlElements.tabsContainer, HtmlElements.tabTitlesContainer);
+        tab.refresh();
+        ActivePlugin.activate($("svg", tab.HtmlBody), tab.SvgWrapper, tab.FigureCreatedCallback);
+        $("a", tab.HtmlTitle).on("shown.bs.tab", SelectTabHandler.bind(null, tab));
+        $(".closeTab", tab.HtmlTitle).on('click', tab.close);
+    }
 };
 
-function SelectTabHandler(tab,e){
-    let targetHref = $(e.target).attr("href");
-    alert(targetHref);
+
+function SelectTabHandler(tab, e) {
+    // let targetHref = $(e.target).attr("href");
+    // alert(targetHref);
+    ActiveTab = tab;
     ActivePlugin.activate($("svg", tab.HtmlBody), tab.SvgWrapper, tab.FigureCreatedCallback);
 }
 
-function DisplayTab(tab){
-    $('.tabTitle').removeClass('active').attr('aria-expanded', 'false');
-    HtmlElements.tabTitlesContainer.append(tab.HtmlTitle);
-    $('.painterTab').removeClass('active').removeClass('in');
-    HtmlElements.tabsContainer.append(tab.HtmlBody);
-}
-
-$(document).ready(function(){
+$(document).ready(function () {
     HtmlElements.Init();
     registerOpenEventForMenuItems();
 
@@ -177,9 +121,8 @@ $(document).ready(function(){
 });
 
 
-
-function registerOpenEventForMenuItems(){
-    $('.dropdown-submenu a.subMenuHeader').on("click", function(e){
+function registerOpenEventForMenuItems() {
+    $('.dropdown-submenu a.subMenuHeader').on("click", function (e) {
         $(this).next('ul').toggle();
         return false;
     });

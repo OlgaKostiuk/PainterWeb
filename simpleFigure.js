@@ -21,7 +21,8 @@ var toolBoxColorPicker;
 var Figure = {
     color: null,
     width: null,
-    type: null
+    type: null,
+    //TODO: add other params
 };
 
 
@@ -149,15 +150,14 @@ var SimpleFigure = {
                             ');
         typeBtns = $(".typeBtn", rightToolBox);
         toolBoxColorPicker = $(".colorPicker", rightToolBox);
-        $(typeBtns).click(this.XCommand.setType);
-        $(toolBoxColorPicker).change({color: this.val()}, this.XCommand.setColor);
+        $(typeBtns).click(SimpleFigure.XCommand.setType);
+        $(toolBoxColorPicker).change(SimpleFigure.XCommand.setColor);
         return rightToolBox;
     },
 
     XCommand: {
-        setColor(){
-            alert("setColor");
-            concole.log(Figure.color);
+        setColor(e){
+            alert(e.target.value);
         },
         setType(){
             $(typeBtns).removeClass('btn-primary').addClass('btn-default');
