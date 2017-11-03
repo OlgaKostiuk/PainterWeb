@@ -19,8 +19,8 @@ var typeBtns;
 var toolBoxColorPicker;
 
 var Figure = {
-    color: null,
-    width: null,
+    color: 'black',
+    lineWidth: 5,
     type: null,
     //TODO: add other params
 };
@@ -108,7 +108,7 @@ var SimpleFigure = {
                                     <span class="text-center">Width</span>\
                                 </div>\
                                 <div style="display: inline-grid">\
-                                    <input class="form-control" type="color" value="#563d7c" id="example-color-input">\
+                                    <input class="form-control colorPicker" type="color" value="#563d7c" id="example-color-input">\
                                     <span class="text-center">Color</span>\
                                 </div>\
                             </li>')
@@ -157,7 +157,7 @@ var SimpleFigure = {
 
     XCommand: {
         setColor(e){
-            alert(e.target.value);
+            Figure.color = e.target.value;
         },
         setType(){
             $(typeBtns).removeClass('btn-primary').addClass('btn-default');
@@ -178,8 +178,8 @@ var SimpleFigure = {
             //         break;
             // }
         },
-        setWidth(){
-            alert("setWidth");
+        setLineWidth(){
+            alert("setLineWidth");
         }
     },
 
@@ -203,7 +203,7 @@ var SimpleFigure = {
         var width = e.pageX - currentSvgElement.offset().left - mDownX;
         var height = e.pageY - currentSvgElement.offset().top - mDownY;
         currentSvgWrapper.rect(mDownX, mDownY, width, height,
-            {fill: 'yellow', stroke: 'navy', strokeWidth: 5});
+            {fill: 'none', stroke: Figure.color, strokeWidth: 5});
     }
 };
 

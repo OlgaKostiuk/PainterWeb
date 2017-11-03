@@ -60,7 +60,7 @@ var XCommand = {
                 HtmlElements.leftToolBox.append(item);
             }
         },
-        TogglePlugin(){
+        TogglePlugin(event){
             if (event.target.checked) {
                 alert("Toggle on plugin: " + event.data.plugin.getName());
             }
@@ -74,7 +74,7 @@ var XCommand = {
             this.SetToolBar();
         },
         ActivatePlugin(plugin){
-            alert("Activate plugin: " + plugin.getName());
+            //alert("Activate plugin: " + plugin.getName());
             ActivePlugin = plugin;
             this.DisplayActivePluginTools();
         },
