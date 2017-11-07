@@ -1,8 +1,6 @@
 /**
  * Created by Olga on 10/13/2017.
  */
-
-
 function Tab() {
     let newTab = {
         Title: null,

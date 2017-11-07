@@ -1,51 +1,58 @@
 /**
  * Created by Olga on 10/6/2017.
  */
-var FigureTypes = {
-    LINE: "Line",
-    RECTANGLE: "Rectangle",
-    RRECTANGLE: "RRectangle",
-    ELLIPSE: "Ellipse"
-};
+(function () {
+    var FigureTypes = {
+        LINE: "Line",
+        RECTANGLE: "Rectangle",
+        RRECTANGLE: "RRectangle",
+        ELLIPSE: "Ellipse"
+    };
 
-var mDownX = 0;
-var mDownY = 0;
+    var mDownX = 0;
+    var mDownY = 0;
 
-var currentSvgElement = null;
-var currentSvgWrapper = null;
-var callBackFigureCreated = null;
+    var currentSvgElement = null;
+    var currentSvgWrapper = null;
+    var callBackFigureCreated = null;
 
-var typeBtns;
-var toolBoxColorPicker;
+    var typeBtns;
+    var toolBoxColorPicker;
 
-var Figure = {
-    color: 'black',
-    lineWidth: 5,
-    type: null,
-    //TODO: add other params
-};
+    var Figure = {
+        color: 'black',
+        lineWidth: 5,
+        type: null,
+        //TODO: add other params
+    };
+
+    var colorPickers = [];
+    var EditMenuInstance = null;
+    var RightToolBox = null;
 
 
-var SimpleFigure = {
-    getName(){
-        return "SimpleFigurePlugin";
-    },
+    var SimpleFigure = {
 
-    getPluginsMenuItem(){
-        return $('<div/>', {
-            "class": 'checkbox'
-        }).append(
-            $('<label/>').append(
-                $('<input/>', {
-                    "type": 'checkbox',
-                    "checked": 'checked'
-                })
-            ).append("Simple Figure")
-        )
-    },
+        getName() {
+            return "SimpleFigurePlugin";
+        },
 
-    getEditMenu() {
-        let editMenu = $.parseHTML('\
+        getPluginsMenuItem() {
+            return $('<div/>', {
+                "class": 'checkbox'
+            }).append(
+                $('<label/>').append(
+                    $('<input/>', {
+                        "type": 'checkbox',
+                        "checked": 'checked'
+                    })
+                ).append("Simple Figure")
+            )
+        },
+
+        getEditMenu() {
+            if (!EditMenuInstance) {
+                EditMenuInstance = $.parseHTML('\
 							<li class="dropdown-submenu">\
                                 <a class="subMenuHeader">Figure<span class="caret"></span></a>\
                                 <ul class="dropdown-menu">\
@@ -74,12 +81,13 @@ var SimpleFigure = {
                                 </ul>\
                             </li>\
                             ');
-        registerOpenEventForMenuItems(editMenu);
-        return editMenu;
-    },
+                registerOpenEventForMenuItems(EditMenuInstance);
+            }
+            return EditMenuInstance;
+        },
 
-    getToolBar() {
-        return $.parseHTML('\
+        getToolBar() {
+            return $.parseHTML('\
                             <li>\
                                 <label> Figure </label>\
                                 <div class="dropdown" style="display: inline-block">\
@@ -112,18 +120,19 @@ var SimpleFigure = {
                                     <span class="text-center">Color</span>\
                                 </div>\
                             </li>')
-    },
+        },
 
-    getLeftToolBox(){
-        return $.parseHTML('\
+        getLeftToolBox() {
+            return $.parseHTML('\
                         <div class="panel-body pluginElement">\
                             <button type="button" class="btn btn-primary btn-block pluginBtn">Simple figure</button>\
                         </div>\
                         ');
-    },
+        },
 
-    getRightToolBox(){
-        var rightToolBox = $.parseHTML('\
+        getRightToolBox() {
+            if (!RightToolBox) {
+                RightToolBox = $.parseHTML('\
         					<div class="panel-body">\
                                 <label>Type:</label>\
                                 <div class="btn-group-vertical">\
@@ -148,70 +157,80 @@ var SimpleFigure = {
                                 </select>\
                             </div>\
                             ');
-        typeBtns = $(".typeBtn", rightToolBox);
-        toolBoxColorPicker = $(".colorPicker", rightToolBox);
-        $(typeBtns).click(SimpleFigure.XCommand.setType);
-        $(toolBoxColorPicker).change(SimpleFigure.XCommand.setColor);
-        return rightToolBox;
-    },
+                typeBtns = $(".typeBtn", RightToolBox);
+                toolBoxColorPicker = $(".colorPicker", RightToolBox);
+                $(typeBtns).click(SimpleFigure.XCommand.setType);
+                $(toolBoxColorPicker).change(SimpleFigure.XCommand.setColor);
+            }
+            return RightToolBox;
+        },
 
-    XCommand: {
-        setColor(e){
-            Figure.color = e.target.value;
+        XCommand: {
+            setColor(e) {
+                Figure.color = e.target.value;
+            },
+            setType() {
+                $(typeBtns).removeClass('btn-primary').addClass('btn-default');
+                $(this).removeClass('btn-default').addClass('btn-primary');
+                Figure.type = this.value;
+                // switch (this.value){
+                //     case FigureTypes.LINE:
+                //         Figure.type = FigureTypes.LINE;
+                //         break;
+                //     case FigureTypes.RECTANGLE:
+                //         Figure.type = FigureTypes.RECTANGLE;
+                //         break;
+                //     case FigureTypes.RRECTANGLE:
+                //         Figure.type = FigureTypes.RRECTANGLE;
+                //         break;
+                //     case FigureTypes.ELLIPSE:
+                //         Figure.type = FigureTypes.ELLIPSE;
+                //         break;
+                // }
+            },
+            setLineWidth() {
+                alert("setLineWidth");
+            }
         },
-        setType(){
-            $(typeBtns).removeClass('btn-primary').addClass('btn-default');
-            $(this).removeClass('btn-default').addClass('btn-primary');
-            Figure.type = this.value;
-            // switch (this.value){
-            //     case FigureTypes.LINE:
-            //         Figure.type = FigureTypes.LINE;
-            //         break;
-            //     case FigureTypes.RECTANGLE:
-            //         Figure.type = FigureTypes.RECTANGLE;
-            //         break;
-            //     case FigureTypes.RRECTANGLE:
-            //         Figure.type = FigureTypes.RRECTANGLE;
-            //         break;
-            //     case FigureTypes.ELLIPSE:
-            //         Figure.type = FigureTypes.ELLIPSE;
-            //         break;
-            // }
+
+        activate(svgElement, svgWrapper, callBack) {
+            currentSvgElement = svgElement;
+            currentSvgWrapper = svgWrapper;
+            callBackFigureCreated = callBack;
+            this.addDrawHandlers();
         },
-        setLineWidth(){
-            alert("setLineWidth");
+
+        addColorPickedHandlers(){
+                        
+        },
+
+        addDrawHandlers() {
+            $(currentSvgElement).on("mousedown", this.Down);
+            $(currentSvgElement).on("mouseup", this.Up);
+        },
+        Down(e) {
+            mDownX = e.pageX - currentSvgElement.offset().left;
+            mDownY = e.pageY - currentSvgElement.offset().top;
+        },
+
+        Up(e) {
+            var width = e.pageX - currentSvgElement.offset().left - mDownX;
+            var height = e.pageY - currentSvgElement.offset().top - mDownY;
+            currentSvgWrapper.rect(mDownX, mDownY, width, height,
+                {fill: 'none', stroke: Figure.color, strokeWidth: 5});
         }
-    },
+    };
 
-    activate(svgElement, svgWrapper, callBack){
-        currentSvgElement = svgElement;
-        currentSvgWrapper = svgWrapper;
-        callBackFigureCreated = callBack;
-        this.addDrawHandlers();
-    },
-
-    addDrawHandlers(){
-        $(currentSvgElement).on( "mousedown", this.Down);
-        $(currentSvgElement).on( "mouseup", this.Up);
-    },
-    Down(e){
-        mDownX = e.pageX - currentSvgElement.offset().left;
-        mDownY = e.pageY - currentSvgElement.offset().top;
-    },
-
-    Up(e){
-        var width = e.pageX - currentSvgElement.offset().left - mDownX;
-        var height = e.pageY - currentSvgElement.offset().top - mDownY;
-        currentSvgWrapper.rect(mDownX, mDownY, width, height,
-            {fill: 'none', stroke: Figure.color, strokeWidth: 5});
+    function registerOpenEventForMenuItems(menu) {
+        $('.dropdown-submenu a.subMenuHeader', menu).on("click", function (e) {
+            $(this).next('ul').toggle();
+            return false;
+        });
     }
-};
 
-function registerOpenEventForMenuItems(menu){
-    $('.dropdown-submenu a.subMenuHeader', menu).on("click", function(e){
-        $(this).next('ul').toggle();
-        return false;
-    });
-}
+    window.Plugins = window.Plugins || [];
+    window.Plugins.push(SimpleFigure);
+})();
+
 
 
